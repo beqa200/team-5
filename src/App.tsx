@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/home";
 import PersonalInfo from "./pages/PersonalInfo";
 import Experience from "./pages/Experience";
 import Education from "./pages/Education";
+import Home from "./pages/Home";
 
 function App() {
   return (
