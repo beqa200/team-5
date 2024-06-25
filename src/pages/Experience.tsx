@@ -3,9 +3,14 @@ import styled from "styled-components";
 export default function Experience() {
   return (
     <MainDiv>
-      <ArrowDiv>
-        <div></div>
-      </ArrowDiv>
+      <HeaderDiv>
+        <ArrowDiv></ArrowDiv>
+        <SecondDiv>
+          <HeaderTxt>გამოცდილება</HeaderTxt>
+          <HeaderTxt>2/3</HeaderTxt>
+        </SecondDiv>
+      </HeaderDiv>
+      <section style={{ marginTop: "77px" }}></section>
     </MainDiv>
   );
 }
@@ -13,8 +18,8 @@ export default function Experience() {
 const MainDiv = styled.div`
   width: 1078px;
   background-color: #f9f9f9;
-  padding-top: 45px;
-  padding-left: 48px;
+  padding: 45px 149px 65px 48px;
+  min-height: 100vh;
 `;
 
 const ArrowDiv = styled.div`
@@ -22,4 +27,24 @@ const ArrowDiv = styled.div`
   height: 40px;
   padding: 12px 16.8px 12px 14px;
   background-color: #fff;
+  border-radius: 50%;
+`;
+
+const HeaderDiv = styled.div`
+  display: flex;
+  gap: 61px;
+  height: 41px;
+`;
+
+const HeaderTxt = styled.h1`
+  font-size: 24px;
+  color: #1a1a1a;
+`;
+
+const SecondDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: -webkit-fill-available;
+  border-bottom: 1px solid #1a1a1a;
 `;
