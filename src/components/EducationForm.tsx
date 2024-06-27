@@ -5,10 +5,10 @@ import { useForm, Controller } from "react-hook-form";
 const EducationForm: React.FC = () => {
   const {
     control,
-    watch,
+    // watch,
     formState: { errors },
   } = useForm();
-  const schoolName = watch("schoolName");
+  // const schoolName = watch("schoolName");
 
   return (
     <Form>
