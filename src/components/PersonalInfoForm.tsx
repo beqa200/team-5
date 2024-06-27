@@ -1,18 +1,37 @@
 import styled from 'styled-components'
+import { useForm } from 'react-hook-form';
 
 function PersonalInfoForm() {
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const onSubmit = (data: unknown) => {
+    console.log(data);
+  };
+
   return (
-    <Container>
+    <Container onSubmit={handleSubmit(onSubmit)}>
       <NamesDiv>
         <NameLeft>
           <label>სახელი</label>
-          <input type="text" placeholder='ანზორი' />
-          <span>მინიმუმ 2 ასო, ქართული ასოები</span>
+          <input type="text" placeholder='ანზორი' id="name" {...register('name', {
+             required: "სახელი სავალდებულოა",
+             minLength: {
+              value: 2,
+              message: 'მინიმუმ 2 ასო, ქართული ასოები'
+             }
+             })}  />
+        {errors.name && <span>მინიმუმ 2 ასო, ქართული ასოები</span>}
         </NameLeft>
         <SurnameRight>
         <label>გვარი</label>
-          <input type="text" placeholder='მუმლაძე' />
-          <span>მინიმუმ 2 ასო, ქართული ასოები</span>
+          <input type="text" placeholder='მუმლაძე' id="surname" {...register('surname', {
+            required: "გვარი სავალდებულოა",
+            minLength: {
+              value: 2,
+              message: 'მინიმუმ 2 ასო, ქართული ასოები'
+            }
+          })} />
+          {errors.surname && <span>მინიმუმ 2 ასო, ქართული ასოები</span>}
         </SurnameRight>
       </NamesDiv>
 
@@ -51,7 +70,7 @@ function PersonalInfoForm() {
 
 export default PersonalInfoForm
 
-const Container = styled.div`
+const Container = styled.form`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -81,7 +100,6 @@ const NameLeft = styled.div`
   input::placeholder{
     color: #000;
     opacity: 0.6;
-    font-family: "myFont";
     font-size: 1rem;
     font-style: normal;
     font-weight: 400;
@@ -90,12 +108,12 @@ const NameLeft = styled.div`
 
   span{
     color: var(---500, #2E2E2E);
-    font-family: "myFont";
     font-size: 0.875rem;
     font-style: normal;
     font-weight: 300;
     line-height: 1.3125rem;
     opacity: 0.5;
+
   }
 `
 const SurnameRight = styled.div`
@@ -114,7 +132,6 @@ const SurnameRight = styled.div`
   input::placeholder{
     color: #000;
     opacity: 0.6;
-    font-family: "myFont";
     font-size: 1rem;
     font-style: normal;
     font-weight: 400;
@@ -123,7 +140,6 @@ const SurnameRight = styled.div`
 
   span{
     color: var(---500, #2E2E2E);
-    font-family: "myFont";
     font-size: 0.875rem;
     font-style: normal;
     font-weight: 300;
@@ -142,7 +158,6 @@ const UploadImage = styled.div`
   }
   span{
     color: var(--off-black, #1A1A1A);
-    font-family: "myFont";
     font-size: 1.125rem;
     font-style: normal;
     font-weight: 500;
@@ -153,7 +168,6 @@ const UploadImage = styled.div`
     border-radius: 0.25rem;
     background: #0E80BF;
     color: white;
-    font-family: "myFont";
     font-size: 0.875rem;
     font-style: normal;
     font-weight: 400;
@@ -176,14 +190,13 @@ const TextareaDiv = styled.div`
   gap: 0.5rem;
 
   textarea{
-    resize: vertical;
-    padding: 1rem;
+    resize: block;
+    padding: 0.81rem 1rem;
     color: #000;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.375rem; 
     text-transform: lowercase;
-    font-family: "myFont";
   }
 `
 const EmailDiv = styled.div`
@@ -203,7 +216,6 @@ const EmailDiv = styled.div`
   }
   span{
     color: var(---500, #2E2E2E);
-    font-family: "myFont";
     font-size: 0.875rem;
     font-style: normal;
     font-weight: 300;
@@ -236,7 +248,6 @@ const NumberDiv = styled.div`
   }
   span{
     color: var(---500, #2E2E2E);
-    font-family: "myFont";
     font-size: 0.875rem;
     font-style: normal;
     font-weight: 300;
