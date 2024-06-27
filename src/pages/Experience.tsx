@@ -1,19 +1,49 @@
 import styled from "styled-components";
+import Header from "../components/exprerienceComp/Header";
+import Input, { Label } from "../components/exprerienceComp/Input";
+import { LightSkyButton } from "../components/EducationForm";
 
 export default function Experience() {
   return (
     <MainDiv>
-      <HeaderDiv>
-        <ArrowDiv>
-          <img src="/Vector.jpg" />
-        </ArrowDiv>
-        <SecondDiv>
-          <HeaderTxt>გამოცდილება</HeaderTxt>
-          <HeaderTxt>2/3</HeaderTxt>
-        </SecondDiv>
-      </HeaderDiv>
+      <Header />
       <section style={{ marginTop: "77px", paddingLeft: "102px" }}>
-        <Label></Label>
+        <div style={{ display: "flex", gap: "31px", flexDirection: "column" }}>
+          <Input
+            type="text"
+            labelTxt="თანამდებობა"
+            errorTxt="მინუმუმ 2 სიმბოლო"
+          >
+            დეველოპერი, დიზაინერი, ა.შ.
+          </Input>
+          <Input
+            type="text"
+            labelTxt="თანამდებობა"
+            errorTxt="მინუმუმ 2 სიმბოლო"
+          >
+            დამსაქმებელი
+          </Input>
+          <div style={{ display: "flex", gap: "56px" }}>
+            <div style={{ width: "calc(50% - 23px)" }}>
+              <Input type="date" labelTxt="დაწყების რიცხვი"></Input>
+            </div>
+            <div style={{ width: "calc(50% - 23px)" }}>
+              <Input type="date" labelTxt="დაწყების რიცხვი"></Input>
+            </div>
+          </div>
+          <TextArea placeholder="როლი თანამდებობაზე და ზოგადი აღწერა"></TextArea>
+          <div
+            style={{
+              marginTop: "56px",
+              height: "1px",
+              width: "100%",
+              backgroundColor: "#bcbcbc",
+            }}
+          ></div>
+          <div style={{ width: "289px" }}>
+            <LightSkyButton>მეტი გამოცდილების დამატება</LightSkyButton>
+          </div>
+        </div>
       </section>
     </MainDiv>
   );
@@ -26,32 +56,11 @@ const MainDiv = styled.div`
   min-height: 100vh;
 `;
 
-const ArrowDiv = styled.div`
-  width: 40px;
-  height: 40px;
-  padding: 12px 16.8px 12px 14px;
-  background-color: #fff;
-  border-radius: 50%;
-  cursor: pointer;
+const TextArea = styled.textarea`
+  height: 123px;
+  padding-left: 16px;
+  padding-top: 13px;
+  resize: none;
+  border: solid 1px #bcbcbc;
+  border-radius: 4px;
 `;
-
-const HeaderDiv = styled.div`
-  display: flex;
-  gap: 61px;
-  height: 41px;
-`;
-
-const HeaderTxt = styled.h1`
-  font-size: 24px;
-  color: #1a1a1a;
-`;
-
-const SecondDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  width: -webkit-fill-available;
-  border-bottom: 1px solid #1a1a1a;
-`;
-
-const Label = styled.label``;
