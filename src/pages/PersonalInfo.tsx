@@ -5,7 +5,7 @@ export default function PersonalInfo() {
   return (
     <div>
       <BackArrowButton />
-      <PageNameDiv pageName={"fada"} pageNumber={2}/>
+      <PageNameDiv pageName={"ᲞᲘᲠᲐᲓᲘ ᲘᲜᲤᲝ"} pageNumber={2}/>
     </div>
   )
 }
