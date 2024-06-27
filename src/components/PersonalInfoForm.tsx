@@ -9,13 +9,21 @@ function PersonalInfoForm() {
           <input type="text" placeholder='ანზორი' />
           <span>მინიმუმ 2 ასო, ქართული ასოები</span>
         </NameLeft>
-
         <SurnameRight>
         <label>გვარი</label>
           <input type="text" placeholder='მუმლაძე' />
           <span>მინიმუმ 2 ასო, ქართული ასოები</span>
         </SurnameRight>
       </NamesDiv>
+
+    <div style={{display: "flex" , justifyContent: "start", width: "100%"}}>
+            <UploadImage>
+        <span>პირადი ფოტოს ატვირთვა</span>
+        <input type="file" id="upload"/>
+        <label htmlFor="upload">ატვირთვა</label>
+      </UploadImage>
+    </div>
+
     </Container>
   )
 }
@@ -27,6 +35,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 `
 
 const NamesDiv = styled.div`
@@ -95,5 +104,34 @@ const SurnameRight = styled.div`
     font-style: normal;
     font-weight: 300;
     line-height: 1.3125rem;
+  }
+`
+const UploadImage = styled.div`
+  display: flex;
+  margin-top: 2.69rem;
+  gap: 1.19rem;
+  align-items: center;
+
+  input[type="file"]{
+    display: none;
+  }
+  span{
+    color: var(--off-black, #1A1A1A);
+    font-family: "Helvetica Neue";
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  label{
+    padding: 0.45rem 1rem;
+    border-radius: 0.25rem;
+    background: #0E80BF;
+    color: white;
+    font-family: "Helvetica Neue";
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
   }
 `
