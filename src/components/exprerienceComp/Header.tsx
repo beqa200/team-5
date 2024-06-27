@@ -14,7 +14,6 @@ export default function Header() {
   );
 }
 
-
 const ArrowDiv = styled.div`
   width: 40px;
   height: 40px;

@@ -123,7 +123,7 @@ const Line = styled.div`
   border-top: 1px solid #bcbcbc;
 `;
 
-const LightSkyButton = styled.button`
+export const LightSkyButton = styled.button`
   display: flex;
   flex-direction: column;
   justify-content: center;
