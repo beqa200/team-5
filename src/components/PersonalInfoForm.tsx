@@ -16,13 +16,19 @@ function PersonalInfoForm() {
         </SurnameRight>
       </NamesDiv>
 
-    <div style={{display: "flex" , justifyContent: "start", width: "100%"}}>
-            <UploadImage>
-        <span>პირადი ფოტოს ატვირთვა</span>
-        <input type="file" id="upload"/>
-        <label htmlFor="upload">ატვირთვა</label>
-      </UploadImage>
+    <div style={{display: "flex" , justifyContent: "start", width: "100%", flexDirection: "column"}}>
+        <UploadImage>
+          <span>პირადი ფოტოს ატვირთვა</span>
+          <input type="file" id="upload"/>
+          <label htmlFor="upload">ატვირთვა</label>
+        </UploadImage>
+
+      <TextareaDiv>
+        <span>ჩემ შესახებ (არასავალდებულო)</span>
+        <textarea name="" placeholder='ძალიან მიყვარს დიზაინის კეთება. დილით ადრე რომ ავდგები გამამხნევებელი ვარჯიშების მაგიერ დიზაინს ვაკეთებ. '></textarea>
+      </TextareaDiv>
     </div>
+
 
     </Container>
   )
@@ -142,5 +148,21 @@ const UploadImage = styled.div`
   }
   label:hover{
     background-color: #0056b3;
+  }
+`
+const TextareaDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 2.5rem;
+  gap: 0.5rem;
+
+  textarea{
+    resize: vertical;
+    padding: 1rem;
+    color: #000;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.375rem; 
+    text-transform: lowercase;
   }
 `
