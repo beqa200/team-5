@@ -29,6 +29,13 @@ function PersonalInfoForm() {
       </TextareaDiv>
     </div>
 
+    <EmailDiv>
+      <label>ელ.ფოსტა</label>
+      <input type="email" placeholder='ანზორი' />
+      <span>უნდა მთავრდებოდეს @redberry.ge-ით</span>
+    </EmailDiv>
+
+
 
     </Container>
   )
@@ -164,5 +171,21 @@ const TextareaDiv = styled.div`
     font-weight: 400;
     line-height: 1.375rem; 
     text-transform: lowercase;
+  }
+`
+const EmailDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.06rem;
+  gap: 0.5rem;
+  width: 100%;
+
+  input{
+    display: flex;
+    padding: 0.8125rem 5.1875rem 0.875rem 1rem;
+    align-items: center;
+    align-self: stretch;
+    border-radius: 0.25rem;
+    border: 1px solid black;
   }
 `
