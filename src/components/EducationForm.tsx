@@ -143,7 +143,7 @@ export const LightSkyButton = styled.button`
   cursor: pointer;
 `;
 
-const BlueButton = styled(LightSkyButton)`
+export const BlueButton = styled(LightSkyButton)`
   background-color: #6b40e3;
   padding: 10px 18px;
 `;

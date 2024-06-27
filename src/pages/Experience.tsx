@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Header from "../components/exprerienceComp/Header";
-import Input, { Label } from "../components/exprerienceComp/Input";
-import { LightSkyButton } from "../components/EducationForm";
+import Input from "../components/exprerienceComp/Input";
+import { BlueButton, LightSkyButton } from "../components/EducationForm";
 
 export default function Experience() {
   return (
@@ -45,6 +45,10 @@ export default function Experience() {
           </div>
         </div>
       </section>
+      <Footer>
+        <BlueButton>უკან</BlueButton>
+        <BlueButton>შემდეგი</BlueButton>
+      </Footer>
     </MainDiv>
   );
 }
@@ -63,4 +67,11 @@ const TextArea = styled.textarea`
   resize: none;
   border: solid 1px #bcbcbc;
   border-radius: 4px;
+`;
+
+const Footer = styled.footer`
+  padding-left: 102px;
+  margin-top: 115px;
+  display: flex;
+  justify-content: space-between;
 `;
