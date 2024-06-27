@@ -6,6 +6,7 @@ import EducationForm from "../components/EducationForm";
 
 const EducationPage: React.FC = () => {
   return (
+
     <MainContainer>
       <LeftDiv>
         <BackArrowButton />
@@ -47,3 +48,4 @@ const ContentDiv = styled.div`
   flex-direction: column;
   align-items: flex-start;
 `;
+
