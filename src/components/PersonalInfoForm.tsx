@@ -25,17 +25,25 @@ function PersonalInfoForm() {
 
       <TextareaDiv>
         <span>ჩემ შესახებ (არასავალდებულო)</span>
-        <textarea name="" placeholder='ძალიან მიყვარს დიზაინის კეთება. დილით ადრე რომ ავდგები გამამხნევებელი ვარჯიშების მაგიერ დიზაინს ვაკეთებ. '></textarea>
+        <textarea name="" placeholder='ძალიან მიყვარს დიზაინის კეთება. დილით ადრე რომ ავდგები გამამხნევებელი ვარჯიშების მაგიერ დიზაინს ვაკეთებ.'></textarea>
       </TextareaDiv>
     </div>
 
     <EmailDiv>
       <label>ელ.ფოსტა</label>
-      <input type="email" placeholder='ანზორი' />
+      <input type="email" placeholder='ანზორი@gmail.com' />
       <span>უნდა მთავრდებოდეს @redberry.ge-ით</span>
     </EmailDiv>
 
+    <NumberDiv>
+      <label>მობილურის ნომერი</label>
+      <input type="number" placeholder='+995 597 63 45 16' />
+      <span>უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს</span>
+    </NumberDiv>
 
+    <div style={{display: "flex" , justifyContent: "end", width: "100%"}}>
+    <Button>შემდეგი</Button>
+    </div>
 
     </Container>
   )
@@ -68,11 +76,11 @@ const NameLeft = styled.div`
   input{
     padding: 0.8125rem 0.875rem 0.875rem 1rem;
     border-radius: 0.25rem;
-    border: 1px solid black;
+    border: 1px solid #BCBCBC;
   }
   input::placeholder{
     color: #000;
-    font-family: "Helvetica Neue";
+    font-family: "myFont";
     font-size: 1rem;
     font-style: normal;
     font-weight: 400;
@@ -81,11 +89,12 @@ const NameLeft = styled.div`
 
   span{
     color: var(---500, #2E2E2E);
-    font-family: "Helvetica Neue";
+    font-family: "myFont";
     font-size: 0.875rem;
     font-style: normal;
     font-weight: 300;
     line-height: 1.3125rem;
+    opacity: 0.5;
   }
 `
 const SurnameRight = styled.div`
@@ -99,11 +108,11 @@ const SurnameRight = styled.div`
     input{
     padding: 0.8125rem 0.875rem 0.875rem 1rem;
     border-radius: 0.25rem;
-    border: 1px solid black;
+    border: 1px solid #BCBCBC;
   }
   input::placeholder{
     color: #000;
-    font-family: "Helvetica Neue";
+    font-family: "myFont";
     font-size: 1rem;
     font-style: normal;
     font-weight: 400;
@@ -112,11 +121,12 @@ const SurnameRight = styled.div`
 
   span{
     color: var(---500, #2E2E2E);
-    font-family: "Helvetica Neue";
+    font-family: "myFont";
     font-size: 0.875rem;
     font-style: normal;
     font-weight: 300;
     line-height: 1.3125rem;
+    opacity: 0.5;
   }
 `
 const UploadImage = styled.div`
@@ -130,7 +140,7 @@ const UploadImage = styled.div`
   }
   span{
     color: var(--off-black, #1A1A1A);
-    font-family: "Helvetica Neue";
+    font-family: "myFont";
     font-size: 1.125rem;
     font-style: normal;
     font-weight: 500;
@@ -141,7 +151,7 @@ const UploadImage = styled.div`
     border-radius: 0.25rem;
     background: #0E80BF;
     color: white;
-    font-family: "Helvetica Neue";
+    font-family: "myFont";
     font-size: 0.875rem;
     font-style: normal;
     font-weight: 400;
@@ -150,7 +160,7 @@ const UploadImage = styled.div`
     cursor: pointer;
     transition: background-color 0.3s;
   }
-  label:active{
+  label:hover{
     transform: scale(0.9);
   }
   label:hover{
@@ -171,6 +181,7 @@ const TextareaDiv = styled.div`
     font-weight: 400;
     line-height: 1.375rem; 
     text-transform: lowercase;
+    font-family: "myFont";
   }
 `
 const EmailDiv = styled.div`
@@ -186,6 +197,62 @@ const EmailDiv = styled.div`
     align-items: center;
     align-self: stretch;
     border-radius: 0.25rem;
-    border: 1px solid black;
+    border: 1px solid #BCBCBC;
+  }
+  span{
+    color: var(---500, #2E2E2E);
+    font-family: "myFont";
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 1.3125rem; 
+    opacity: 0.5;
+  }
+`
+const NumberDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.06rem;
+    gap: 0.5rem;
+    width: 100%;
+
+  input{
+    display: flex;
+    padding: 0.8125rem 5.1875rem 0.875rem 1rem;
+    align-items: center;
+    align-self: stretch;
+    border-radius: 0.25rem;
+    border: 1px solid #BCBCBC;
+  }
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+  }
+  span{
+    color: var(---500, #2E2E2E);
+    font-family: "myFont";
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 1.3125rem; 
+    opacity: 0.5;
+  }
+`
+const Button = styled.button`
+  width: 9.4375rem;
+  height: 3rem;
+  flex-shrink: 0;
+  border-radius: 0.25rem;
+  background: #6B40E3;
+  border: none;
+  color: white;
+  margin-top: 9.5rem;
+  cursor: pointer;    
+  transition: background-color 0.3s;
+
+  &:hover{
+    background-color: #0056b3;
+    transform: scale(1.1);
   }
 `
