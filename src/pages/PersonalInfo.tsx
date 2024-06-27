@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import BackArrowButton from "../components/BackArrowButton";
 import PageNameDiv from "../components/PageNameDiv";
+import PersonalInfoForm from "../components/PersonalInfoForm";
 
 export default function PersonalInfo() {
   return (
@@ -10,7 +11,7 @@ export default function PersonalInfo() {
         <BackArrowButton />
         <ContentDiv>
         <PageNameDiv pageName={"ᲞᲘᲠᲐᲓᲘ ᲘᲜᲤᲝ"} pageNumber={2}/>
-          
+          <PersonalInfoForm />
         </ContentDiv>
       </LeftDiv>
       <RightComponent>CV</RightComponent>
