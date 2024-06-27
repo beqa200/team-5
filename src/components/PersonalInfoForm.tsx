@@ -124,7 +124,7 @@ const UploadImage = styled.div`
     line-height: normal;
   }
   label{
-    padding: 0.45rem 1rem;
+    padding: 0.4rem 1rem;
     border-radius: 0.25rem;
     background: #0E80BF;
     color: white;
@@ -133,5 +133,14 @@ const UploadImage = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    user-select: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  label:active{
+    transform: scale(0.9);
+  }
+  label:hover{
+    background-color: #0056b3;
   }
 `
