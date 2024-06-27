@@ -1,40 +1,107 @@
 import React from "react";
 import styled from "styled-components";
+import { useForm, Controller } from "react-hook-form";
 
 const EducationForm: React.FC = () => {
+  const {
+    control,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const schoolName = watch("schoolName");
+
   return (
     <Form>
       <Label>სასწავლებელი</Label>
-      <Input type="text" placeholder="სასწავლებელი" />
-      <InputError>მინიმუმ 2 სიმბოლო</InputError>
+      <Controller
+        name="schoolName"
+        control={control}
+        defaultValue=""
+        rules={{ minLength: 2 }}
+        render={({ field }) => (
+          <Input
+            {...field}
+            type="text"
+            placeholder="სასწავლებელი"
+            style={{
+              borderColor: field.value?.length >= 2 ? "green" : "#bcbcbc",
+            }}
+          />
+        )}
+      />
+      {errors.schoolName && <InputError>მინიმუმ 2 სიმბოლო</InputError>}
       <SelAndCalDiv>
         <LabelField>
           <Label>ხარისხი</Label>
-          <Select defaultValue={"აირჩიეთ ხარისხი"}>
-            <option value="developer">საშუალო სკოლის დიპლომი</option>
-            <option value="designer">ზოგადსაგანმანათლებლო დიპლომი</option>
-            <option value="manager">ბაკალავრი</option>
-            <option value="developer">მაგისტრი</option>
-            <option value="designer">დოქტორი</option>
-            <option value="manager">ასოცირებული ხარისხი</option>
-            <option value="developer">სტუდენტი</option>
-            <option value="designer">კოლეჯი (ხარისხის გარეშე)</option>
-            <option value="manager">სხვა</option>
-          </Select>
+          <Controller
+            name="degree"
+            control={control}
+            defaultValue="აირჩიეთ ხარისხი"
+            render={({ field }) => (
+              <Select
+                {...field}
+                style={{
+                  borderColor:
+                    field.value !== "აირჩიეთ ხარისხი" ? "green" : "#bcbcbc",
+                }}
+              >
+                <option value="აირჩიეთ ხარისხი" disabled>
+                  აირჩიეთ ხარისხი
+                </option>
+                <option value="საშუალო სკოლის დიპლომი">
+                  საშუალო სკოლის დიპლომი
+                </option>
+                <option value="ზოგადსაგანმანათლებლო დიპლომი">
+                  ზოგადსაგანმანათლებლო დიპლომი
+                </option>
+                <option value="ბაკალავრი">ბაკალავრი</option>
+                <option value="მაგისტრი">მაგისტრი</option>
+                <option value="დოქტორი">დოქტორი</option>
+                <option value="ასოცირებული ხარისხი">ასოცირებული ხარისხი</option>
+                <option value="სტუდენტი">სტუდენტი</option>
+                <option value="კოლეჯი (ხარისხის გარეშე)">
+                  კოლეჯი (ხარისხის გარეშე)
+                </option>
+                <option value="სხვა">სხვა</option>
+              </Select>
+            )}
+          />
         </LabelField>
         <LabelField>
           <Label>დამთავრების რიცხვი</Label>
-          <CalendarDiv type="date" />
+          <Controller
+            name="date"
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <CalendarDiv
+                {...field}
+                type="date"
+                style={{
+                  borderColor: field.value ? "green" : "#bcbcbc",
+                }}
+              />
+            )}
+          />
         </LabelField>
       </SelAndCalDiv>
-      <Label style={{ marginTop: "30px" }}>განათლების აღწერა</Label>
-      <Textarea rows={4} />
+      <Label style={{ marginTop: "30px" }}>აღწერა</Label>
+      <Controller
+        name="textarea"
+        control={control}
+        defaultValue=""
+        render={({ field }) => (
+          <Textarea
+            rows={4}
+            placeholder="განათლების აღწერა"
+            {...field}
+            style={{
+              borderColor: field.value?.length >= 2 ? "green" : "#bcbcbc",
+            }}
+          />
+        )}
+      />
       <Line></Line>
-      <LightSkyButton>სხვა სასწავლებლის დამატება</LightSkyButton>
-      <ButtonDivs>
-        <BlueButton>უკან</BlueButton>
-        <BlueButton>დასრულება</BlueButton>
-      </ButtonDivs>
     </Form>
   );
 };
@@ -69,6 +136,7 @@ const Input = styled.input`
   border-radius: 4px;
   width: 100%;
   margin: 8px 0;
+  outline: none;
 `;
 
 const InputError = styled.p`
@@ -107,6 +175,7 @@ const CalendarDiv = styled.input`
   border: 1px solid #bcbcbc;
   border-radius: 4px;
   cursor: pointer;
+  outline: none;
 `;
 
 const Textarea = styled.textarea`
@@ -115,43 +184,12 @@ const Textarea = styled.textarea`
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  resize: vertical;
+  outline: none;
 `;
 
 const Line = styled.div`
   width: 100%;
   margin: 50px 0 45px 0;
   border-top: 1px solid #bcbcbc;
-`;
-
-const LightSkyButton = styled.button`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 4px;
-  border: none;
-  background-color: #62a1eb;
-  font-size: 14px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: center;
-  color: #fff;
-  padding: 14px 22px;
-  cursor: pointer;
-`;
-
-const BlueButton = styled(LightSkyButton)`
-  background-color: #6b40e3;
-  padding: 10px 18px;
-`;
-
-const ButtonDivs = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-top: 100px;
 `;
