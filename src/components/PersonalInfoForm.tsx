@@ -80,6 +80,7 @@ const NameLeft = styled.div`
   }
   input::placeholder{
     color: #000;
+    opacity: 0.6;
     font-family: "myFont";
     font-size: 1rem;
     font-style: normal;
@@ -112,6 +113,7 @@ const SurnameRight = styled.div`
   }
   input::placeholder{
     color: #000;
+    opacity: 0.6;
     font-family: "myFont";
     font-size: 1rem;
     font-style: normal;
@@ -223,6 +225,9 @@ const NumberDiv = styled.div`
     align-self: stretch;
     border-radius: 0.25rem;
     border: 1px solid #BCBCBC;
+  }
+  input[type=number]{
+    opacity: 0.6;
   }
   input[type=number]::-webkit-outer-spin-button,
   input[type=number]::-webkit-inner-spin-button {
