@@ -52,20 +52,20 @@ export default function Experience() {
     name: "experience",
   });
 
-const getBorderColor = (index: number) => {
-  const value = watch(`experience.${index}.description`);
-  const hasSubmitted = submitCount > 0;
-  const error = errors?.experience?.[index]?.description;
+  const getBorderColor = (index: number) => {
+    const value = watch(`experience.${index}.description`);
+    const hasSubmitted = submitCount > 0;
+    const error = errors?.experience?.[index]?.description;
 
-  if (hasSubmitted) {
-    if (error) {
-      return "#ef5050"; // Red for errors
-    } else if (value) {
-      return "#98e37e"; // Green if there's a value
+    if (hasSubmitted) {
+      if (error) {
+        return "#ef5050"; 
+      } else if (value) {
+        return "#98e37e"; 
+      }
     }
-  }
-  return "#bcbcbc"; // Default color
-};
+    return "#bcbcbc"; 
+  };
 
   useEffect(() => {
     const savedData = localStorage.getItem("experienceFormData");
@@ -167,8 +167,8 @@ const getBorderColor = (index: number) => {
                 append({
                   position: "",
                   employer: "",
-                  startingDate: "",
-                  finishingDate: "",
+                  startingDate: "mm/dd/yyyy",
+                  finishingDate: "mm/dd/yyyy",
                   description: "",
                 })
               }

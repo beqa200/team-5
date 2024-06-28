@@ -102,6 +102,7 @@ const Input: React.FC<InputProps> = ({
     }
   };
 
+  console.log(value);
 
   return (
     <div style={{ position: "relative" }}>
@@ -112,7 +113,10 @@ const Input: React.FC<InputProps> = ({
         {...register(name, validationRules)}
         style={{
           borderColor: getBorderColor(),
-          color: value === "mm/dd/yyyy" ? "rgba(0, 0, 0, 0.6)" : "inherit",
+          color:
+            value === "mm/dd/yyyy" || value === ""
+              ? "rgba(0, 0, 0, 0.6)"
+              : "black",
         }}
       />
       {renderStatusImage()}
