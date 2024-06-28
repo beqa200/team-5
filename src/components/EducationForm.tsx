@@ -5,10 +5,8 @@ import { useForm, Controller } from "react-hook-form";
 const EducationForm: React.FC = () => {
   const {
     control,
-    // watch,
     formState: { errors },
   } = useForm();
-  // const schoolName = watch("schoolName");
 
   return (
     <Form>
@@ -27,6 +25,22 @@ const EducationForm: React.FC = () => {
               borderColor: field.value?.length >= 2 ? "green" : "#bcbcbc",
             }}
           />
+        )}
+      />
+      <Controller
+        name="schoolName"
+        control={control}
+        defaultValue=""
+        rules={{ minLength: 2 }}
+        render={({ field }) => (
+          <InputError
+            {...field}
+            style={{
+              color: field.value?.length >= 2 ? "green" : "#2e2e2e",
+            }}
+          >
+            მინიმუმ 2 სიმბოლო
+          </InputError>
         )}
       />
       {errors.schoolName && <InputError>მინიმუმ 2 სიმბოლო</InputError>}
