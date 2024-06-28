@@ -220,11 +220,11 @@ export const BlueButton = styled(LightSkyButton)`
   padding: 10px 18px;
 `;
 
-const ButtonDivs = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-top: 100px;
-`;
+// const ButtonDivs = styled.div`
+//   width: 100%;
+//   display: flex;
+//   align-items: flex-start;
+//   justify-content: space-between;
+//   margin-top: 100px;
+// `;
 

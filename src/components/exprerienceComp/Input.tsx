@@ -18,10 +18,10 @@ const Input: React.FC<InputProps> = ({
 }) => {
   const {
     register,
+    watch,
     formState: { errors, submitCount },
   } = useFormContext();
 
-  console.log(submitCount);
   const georgianRegex = /^[ა-ჰ]+$/;
 
   const validateGeorgian = (value: string) =>
@@ -47,11 +47,15 @@ const Input: React.FC<InputProps> = ({
       .filter(Boolean)
       .reduce((acc, part) => acc && acc[part], obj);
   };
-  const errorMessage = getNestedValue(errors, name);
 
-  console.log(errors[name]);
+  const errorMessage = getNestedValue(errors, name);
+  const value = watch(name);
+
   const getBorderColor = () => {
-    if (submitCount != 0) {
+    if (submitCount !== 0) {
+      if (!value && !errorMessage) {
+        return "#bcbcbc";
+      }
       if (errorMessage) {
         return "#ef5050";
       } else {
@@ -64,6 +68,9 @@ const Input: React.FC<InputProps> = ({
   const renderStatusImage = () => {
     if (name.includes("position") || name.includes("employer")) {
       if (submitCount !== 0) {
+        if (!value && !errorMessage) {
+          return null;
+        }
         if (errorMessage) {
           return (
             <img
@@ -95,6 +102,7 @@ const Input: React.FC<InputProps> = ({
     }
   };
 
+
   return (
     <div style={{ position: "relative" }}>
       <Label>{labelTxt}</Label>
@@ -102,7 +110,10 @@ const Input: React.FC<InputProps> = ({
         placeholder={type === "text" ? children : ""}
         type={type}
         {...register(name, validationRules)}
-        style={{ borderColor: getBorderColor() }}
+        style={{
+          borderColor: getBorderColor(),
+          color: value === "mm/dd/yyyy" ? "rgba(0, 0, 0, 0.6)" : "inherit",
+        }}
       />
       {renderStatusImage()}
       <p style={{ marginTop: "8px", fontSize: "14px", color: "#2e2e2e" }}>
@@ -137,7 +148,6 @@ const Inputs = styled.input<{ height?: string }>`
     font-size: 14px;
     font-weight: normal;
   }
-
 `;
 
 export default Input;

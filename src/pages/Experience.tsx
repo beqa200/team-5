@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import PageNameDiv from "../components/PageNameDiv";
-import BackArrowButton from "../components/BackArrowButton";
 import Header from "../components/exprerienceComp/Header";
 import Input from "../components/exprerienceComp/Input";
 import { BlueButton, LightSkyButton } from "../components/EducationForm";
@@ -28,8 +26,8 @@ export default function Experience() {
         {
           position: "",
           employer: "",
-          startingDate: "",
-          finishingDate: "",
+          startingDate: "mm/dd/yyyy",
+          finishingDate: "mm/dd/yyyy",
           description: "",
         },
       ],
@@ -46,6 +44,7 @@ export default function Experience() {
     handleSubmit,
     control,
     register,
+    watch,
     formState: { submitCount, errors },
   } = methods;
   const { fields, append, remove } = useFieldArray({
@@ -53,16 +52,20 @@ export default function Experience() {
     name: "experience",
   });
 
-  const getBorderColor = (index: number) => {
-    if (submitCount != 0) {
-      if (errors.experience && errors.experience[index]?.description) {
-        return "#ef5050";
-      } else {
-        return "#98e37e";
-      }
+const getBorderColor = (index: number) => {
+  const value = watch(`experience.${index}.description`);
+  const hasSubmitted = submitCount > 0;
+  const error = errors?.experience?.[index]?.description;
+
+  if (hasSubmitted) {
+    if (error) {
+      return "#ef5050"; // Red for errors
+    } else if (value) {
+      return "#98e37e"; // Green if there's a value
     }
-    return "#bcbcbc";
-  };
+  }
+  return "#bcbcbc"; // Default color
+};
 
   useEffect(() => {
     const savedData = localStorage.getItem("experienceFormData");
@@ -145,23 +148,9 @@ export default function Experience() {
                   style={{
                     width: "100%",
                     display: "flex",
-                    justifyContent: "space-between",
+                    justifyContent: "flex-end",
                   }}
                 >
-                  <LightSkyButton
-                    type="button"
-                    onClick={() =>
-                      append({
-                        position: "",
-                        employer: "",
-                        startingDate: "",
-                        finishingDate: "",
-                        description: "",
-                      })
-                    }
-                  >
-                    მეტი გამოცდილების დამატება
-                  </LightSkyButton>
                   {index !== 0 && (
                     <DeleteButton type="button" onClick={() => remove(index)}>
                       გამოცდილების წაშლა
@@ -170,6 +159,22 @@ export default function Experience() {
                 </div>
               </div>
             ))}
+
+            <LightSkyButton
+              style={{ marginTop: fields.length !== 1 ? "-48px" : "0px" }}
+              type="button"
+              onClick={() =>
+                append({
+                  position: "",
+                  employer: "",
+                  startingDate: "",
+                  finishingDate: "",
+                  description: "",
+                })
+              }
+            >
+              მეტი გამოცდილების დამატება
+            </LightSkyButton>
           </section>
           <Footer>
             <Link to={"/PersonalInfo"}>
@@ -189,16 +194,6 @@ const MainDiv = styled.div`
   padding: 45px 149px 65px 48px;
   min-height: 100vh;
 `;
-
-
-const HeaderDiv = styled.div`
-  display: flex;
-  align-items: flex-start;
-  gap: 61px;
-  height: 41px;
-`;
-
-const Label = styled.label``;
 
 const TextArea = styled.textarea`
   height: 123px;
