@@ -13,7 +13,7 @@ export default function PersonalInfo() {
           <BackArrowButton />
         </Link>
         <ContentDiv>
-        <PageNameDiv pageName={"ᲞᲘᲠᲐᲓᲘ ᲘᲜᲤᲝ"} pageNumber={2}/>
+        <PageNameDiv pageName={"ᲞᲘᲠᲐᲓᲘ ᲘᲜᲤᲝ"} pageNumber={1}/>
           <PersonalInfoForm />
         </ContentDiv>
       </LeftDiv>

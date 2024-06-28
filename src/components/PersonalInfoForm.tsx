@@ -11,27 +11,30 @@ function PersonalInfoForm() {
   return (
     <Container onSubmit={handleSubmit(onSubmit)}>
       <NamesDiv>
-        <NameLeft>
+        <NameLeft errorsname={errors.name}>
           <label>სახელი</label>
-          <input type="text" placeholder='ანზორი' id="name" {...register('name', {
+          <input type="text" placeholder='ჩაწერეთ სახელი' id="name" 
+           {...register('name', {
              required: "სახელი სავალდებულოა",
              minLength: {
               value: 2,
               message: 'მინიმუმ 2 ასო, ქართული ასოები'
              }
-             })}  />
-        {errors.name && <span>მინიმუმ 2 ასო, ქართული ასოები</span>}
+             })} 
+             />
+
+        <span>მინიმუმ 2 ასო, ქართული ასოები</span>
         </NameLeft>
         <SurnameRight>
         <label>გვარი</label>
-          <input type="text" placeholder='მუმლაძე' id="surname" {...register('surname', {
+          <input type="text" placeholder='ჩაწერეთ გვარი' id="surname" {...register('surname', {
             required: "გვარი სავალდებულოა",
             minLength: {
               value: 2,
               message: 'მინიმუმ 2 ასო, ქართული ასოები'
             }
           })} />
-          {errors.surname && <span>მინიმუმ 2 ასო, ქართული ასოები</span>}
+          <span>მინიმუმ 2 ასო, ქართული ასოები</span>
         </SurnameRight>
       </NamesDiv>
 
@@ -91,11 +94,13 @@ const NameLeft = styled.div`
   gap: 0.5rem;
   width: 100%;
   padding-right: 1.5rem;
+  
 
   input{
     padding: 0.8125rem 0.875rem 0.875rem 1rem;
     border-radius: 0.25rem;
-    border: 1px solid #BCBCBC;
+    outline: none;
+    border: {${props => props.errorsname ? "1px solid red" : "1px solid green"}}; 
   }
   input::placeholder{
     color: #000;
@@ -113,7 +118,6 @@ const NameLeft = styled.div`
     font-weight: 300;
     line-height: 1.3125rem;
     opacity: 0.5;
-
   }
 `
 const SurnameRight = styled.div`
