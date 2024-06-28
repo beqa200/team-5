@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import PageNameDiv from "../components/PageNameDiv";
+import BackArrowButton from "../components/BackArrowButton";
 import Header from "../components/exprerienceComp/Header";
 import Input from "../components/exprerienceComp/Input";
 import { BlueButton, LightSkyButton } from "../components/EducationForm";
@@ -62,19 +64,19 @@ export default function Experience() {
     return "#bcbcbc";
   };
 
-  // useEffect(() => {
-  //   const savedData = localStorage.getItem("experienceFormData");
-  //   if (savedData) {
-  //     methods.reset(JSON.parse(savedData));
-  //   }
-  // }, []);
+  useEffect(() => {
+    const savedData = localStorage.getItem("experienceFormData");
+    if (savedData) {
+      methods.reset(JSON.parse(savedData));
+    }
+  }, []);
 
-  // useEffect(() => {
-  //   const subscription = methods.watch((value) => {
-  //     localStorage.setItem("experienceFormData", JSON.stringify(value));
-  //   });
-  //   return () => subscription.unsubscribe();
-  // }, []);
+  useEffect(() => {
+    const subscription = methods.watch((value) => {
+      localStorage.setItem("experienceFormData", JSON.stringify(value));
+    });
+    return () => subscription.unsubscribe();
+  }, []);
 
   return (
     <FormProvider {...methods}>
@@ -187,6 +189,16 @@ const MainDiv = styled.div`
   padding: 45px 149px 65px 48px;
   min-height: 100vh;
 `;
+
+
+const HeaderDiv = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 61px;
+  height: 41px;
+`;
+
+const Label = styled.label``;
 
 const TextArea = styled.textarea`
   height: 123px;
