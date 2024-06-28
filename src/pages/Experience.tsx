@@ -4,7 +4,7 @@ import Input from "../components/exprerienceComp/Input";
 import { BlueButton, LightSkyButton } from "../components/EducationForm";
 import { Link, useNavigate } from "react-router-dom";
 import { FormProvider, useForm, useFieldArray } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type formTypes = {
   experience: {
@@ -61,6 +61,20 @@ export default function Experience() {
     }
     return "#bcbcbc";
   };
+
+  // useEffect(() => {
+  //   const savedData = localStorage.getItem("experienceFormData");
+  //   if (savedData) {
+  //     methods.reset(JSON.parse(savedData));
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   const subscription = methods.watch((value) => {
+  //     localStorage.setItem("experienceFormData", JSON.stringify(value));
+  //   });
+  //   return () => subscription.unsubscribe();
+  // }, []);
 
   return (
     <FormProvider {...methods}>
