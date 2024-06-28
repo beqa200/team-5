@@ -193,3 +193,38 @@ const Line = styled.div`
   margin: 50px 0 45px 0;
   border-top: 1px solid #bcbcbc;
 `;
+
+
+export const LightSkyButton = styled.button`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  border: none;
+  background-color: #62a1eb;
+  font-size: 14px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #fff;
+  padding: 14px 22px;
+  cursor: pointer;
+`;
+
+export const BlueButton = styled(LightSkyButton)`
+  background-color: #6b40e3;
+  padding: 10px 18px;
+`;
+
+const ButtonDivs = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-top: 100px;
+`;
+
