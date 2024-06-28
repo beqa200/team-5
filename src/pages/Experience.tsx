@@ -4,6 +4,7 @@ import Input from "../components/exprerienceComp/Input";
 import { BlueButton, LightSkyButton } from "../components/EducationForm";
 import { Link } from "react-router-dom";
 import { FormProvider, useForm, useFieldArray } from "react-hook-form";
+import { useState } from "react";
 
 type formTypes = {
   experience: {
@@ -15,11 +16,9 @@ type formTypes = {
   }[];
 };
 
-const submit = (data: formTypes) => {
-  console.log(data);
-};
-
 export default function Experience() {
+  const [experienceInfo, setExperienceInfo] = useState<formTypes>();
+
   const methods = useForm<formTypes>({
     defaultValues: {
       experience: [
@@ -34,11 +33,32 @@ export default function Experience() {
     },
   });
 
-  const { handleSubmit, control, register } = methods;
+  const submit = (data: formTypes) => {
+    console.log(experienceInfo);
+    setExperienceInfo(data);
+  };
+
+  const {
+    handleSubmit,
+    control,
+    register,
+    formState: { submitCount, errors },
+  } = methods;
   const { fields, append, remove } = useFieldArray({
     control,
     name: "experience",
   });
+
+  const getBorderColor = (index: number) => {
+    if (submitCount != 0) {
+      if (errors.experience && errors.experience[index]?.description) {
+        return "red";
+      } else {
+        return "green";
+      }
+    }
+    return "#bcbcbc";
+  };
 
   return (
     <FormProvider {...methods}>
@@ -93,6 +113,7 @@ export default function Experience() {
                   {...register(`experience.${index}.description`, {
                     required: true,
                   })}
+                  style={{ borderColor: getBorderColor(index) }}
                 ></TextArea>
                 <div
                   style={{
@@ -134,7 +155,7 @@ export default function Experience() {
           </section>
           <Footer>
             <Link to={"/PersonalInfo"}>
-              <BlueButton>უკან</BlueButton>
+              <BlueButton type="button">უკან</BlueButton>
             </Link>
             <BlueButton>შემდეგი</BlueButton>
           </Footer>
@@ -156,7 +177,7 @@ const TextArea = styled.textarea`
   padding-left: 16px;
   padding-top: 13px;
   resize: none;
-  border: solid 1px #bcbcbc;
+  border: solid 1px;
   border-radius: 4px;
   outline: none;
 `;

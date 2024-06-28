@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import Redberry from "../../public/images/LOGO-02 3.png";
-import BackgroundImage from "../../public/images/shutterstock_2189773743 1.png";
-import Agency from "../../public/images/LOGO-40 1.png"
+import Redberry from "/images/LOGO-02 3.png";
+import BackgroundImage from "/images/shutterstock_2189773743 1.png";
+import Agency from "/images/LOGO-40 1.png"
 
 export default function Home() {
   return (

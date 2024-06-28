@@ -18,9 +18,10 @@ const Input: React.FC<InputProps> = ({
 }) => {
   const {
     register,
-    formState: { errors },
+    formState: { errors, submitCount },
   } = useFormContext();
 
+  console.log(submitCount);
   const georgianRegex = /^[ა-ჰ]+$/;
 
   const validateGeorgian = (value: string) =>
@@ -40,15 +41,70 @@ const Input: React.FC<InputProps> = ({
     };
   }
 
+  const getNestedValue = (obj: any, path: string) => {
+    return path
+      .split(/[\.\[\]]+/)
+      .filter(Boolean)
+      .reduce((acc, part) => acc && acc[part], obj);
+  };
+  const errorMessage = getNestedValue(errors, name);
+
+  console.log(errors[name]);
+  const getBorderColor = () => {
+    if (submitCount != 0) {
+      if (errorMessage) {
+        return "#ef5050";
+      } else {
+        return "#98e37e";
+      }
+    }
+    return "#bcbcbc";
+  };
+
+  const renderStatusImage = () => {
+    if (name.includes("position") || name.includes("employer")) {
+      if (submitCount !== 0) {
+        if (errorMessage) {
+          return (
+            <img
+              style={{
+                position: "absolute",
+                top: "50%",
+                transform: "translateY(-50%)",
+                right: "-37.5px",
+              }}
+              src="/images/warning.png"
+              alt="Warning"
+            />
+          );
+        } else {
+          return (
+            <img
+              src="/images/done.png"
+              alt="Done"
+              style={{
+                position: "absolute",
+                top: "50%",
+                transform: "translateY(-30%)",
+                right: "14.8px",
+              }}
+            />
+          );
+        }
+      }
+    }
+  };
+
   return (
-    <div>
+    <div style={{ position: "relative" }}>
       <Label>{labelTxt}</Label>
       <Inputs
         placeholder={type === "text" ? children : ""}
         type={type}
         {...register(name, validationRules)}
-        name={name}
+        style={{ borderColor: getBorderColor() }}
       />
+      {renderStatusImage()}
       <p style={{ marginTop: "8px", fontSize: "14px", color: "#2e2e2e" }}>
         {errorTxt}
       </p>
@@ -58,7 +114,7 @@ const Input: React.FC<InputProps> = ({
 
 export const Label = styled.label`
   font-size: 16px;
-  font-weight: 500;
+  font-weight: bold;
   line-height: 1.31;
 `;
 
@@ -66,13 +122,22 @@ const Inputs = styled.input<{ height?: string }>`
   width: -webkit-fill-available;
   height: 48px;
   padding-left: 16px;
-  color: rgba(0, 0, 0, 0.6);
+
   margin-top: 8px;
-  border: solid 1px #bcbcbc;
+  border: solid 1px;
   background-color: #fff;
   border-radius: 4px;
   padding-right: 15px;
   outline: none;
+  font-size: 16px;
+  font-weight: normal;
+
+  &::placeholder {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+    font-weight: normal;
+  }
+
 `;
 
 export default Input;
