@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Header from "../components/exprerienceComp/Header";
 import Input from "../components/exprerienceComp/Input";
 import { BlueButton, LightSkyButton } from "../components/EducationForm";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FormProvider, useForm, useFieldArray } from "react-hook-form";
 import { useState } from "react";
 
@@ -18,6 +18,7 @@ type formTypes = {
 
 export default function Experience() {
   const [experienceInfo, setExperienceInfo] = useState<formTypes>();
+  const navigate = useNavigate();
 
   const methods = useForm<formTypes>({
     defaultValues: {
@@ -36,6 +37,7 @@ export default function Experience() {
   const submit = (data: formTypes) => {
     console.log(experienceInfo);
     setExperienceInfo(data);
+    navigate("/Education");
   };
 
   const {
@@ -52,9 +54,9 @@ export default function Experience() {
   const getBorderColor = (index: number) => {
     if (submitCount != 0) {
       if (errors.experience && errors.experience[index]?.description) {
-        return "red";
+        return "#ef5050";
       } else {
-        return "green";
+        return "#98e37e";
       }
     }
     return "#bcbcbc";
