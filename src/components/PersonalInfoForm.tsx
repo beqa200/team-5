@@ -1,22 +1,37 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
 
 function PersonalInfoForm() {
-  const { register, handleSubmit, formState: { errors, submitCount } } = useForm();
+  const { register, handleSubmit, formState: { errors, submitCount }, setValue } = useForm();
+
+  useEffect(() => {
+    const fields = ['name', 'surname', 'email', 'number'];
+    fields.forEach(field => {
+      const storedValue = localStorage.getItem(field);
+      if (storedValue) {
+        setValue(field, storedValue);
+      }
+    });
+  }, [setValue]);
 
   const onSubmit = (data: unknown) => {
     console.log(data);
   };
 
   const getBorderColor = (fieldName: string) => {
-    if(submitCount > 0){
-      if(errors[fieldName]){
+    if (submitCount > 0) {
+      if (errors[fieldName]) {
         return "red";
-      }else{
+      } else {
         return "#98E37E";
       }
-    } 
+    }
     return "#BCBCBC";
+  };
+
+  const handleInputChange = (event: { target: { name: string; value: string; }; }) => {
+    localStorage.setItem(event.target.name, event.target.value);
   };
 
   return (
@@ -28,6 +43,7 @@ function PersonalInfoForm() {
             type="text" 
             placeholder='ჩაწერეთ სახელი' 
             id="name" 
+        
             style={{borderColor: getBorderColor('name')}}
             {...register('name', {
               required: "სახელი სავალდებულოა",
@@ -36,6 +52,7 @@ function PersonalInfoForm() {
                 message: 'მინიმუმ 2 ასო, ქართული ასოები'
               }
             })} 
+            onChange={handleInputChange}
           />
           <span>მინიმუმ 2 ასო, ქართული ასოები</span>
         </NameLeft>
@@ -45,6 +62,7 @@ function PersonalInfoForm() {
             type="text" 
             placeholder='ჩაწერეთ გვარი' 
             id="surname" 
+
             style={{borderColor: getBorderColor('surname')}}
             {...register('surname', {
               required: "გვარი სავალდებულოა",
@@ -53,6 +71,7 @@ function PersonalInfoForm() {
                 message: 'მინიმუმ 2 ასო, ქართული ასოები'
               }
             })} 
+            onChange={handleInputChange}
           />
           <span>მინიმუმ 2 ასო, ქართული ასოები</span>
         </SurnameRight>
@@ -68,8 +87,9 @@ function PersonalInfoForm() {
         <TextareaDiv>
           <span>ჩემ შესახებ (არასავალდებულო)</span>
           <textarea 
-            name="" 
-            placeholder='ძალიან მიყვარს დიზაინის კეთება. დილით ადრე რომ ავდგები გამამხნევებელი ვარჯიშების მაგიერ დიზაინს ვაკეთებ.'
+            name="about" 
+            placeholder='ზოგადი ინფო შენ შესახებ'
+            onChange={handleInputChange}
           ></textarea>
         </TextareaDiv>
       </div>
@@ -78,7 +98,9 @@ function PersonalInfoForm() {
         <label>ელ.ფოსტა</label>
         <input 
           type="email" 
-          placeholder='ანზორი@gmail.com' 
+          placeholder='ანზორი@redberry.com' 
+          id="email"
+
           style={{borderColor: getBorderColor('email')}}
           {...register('email', {
             required: "ელ.ფოსტა სავალდებულოა",
@@ -87,6 +109,7 @@ function PersonalInfoForm() {
               message: "უნდა მთავრდებოდეს @redberry.ge-ით"
             }
           })}
+          onChange={handleInputChange}
         />
         <span>უნდა მთავრდებოდეს @redberry.ge-ით</span>
       </EmailDiv>
@@ -96,6 +119,8 @@ function PersonalInfoForm() {
         <input 
           type="text" 
           placeholder='+995 597 63 45 16' 
+          id="number"
+
           style={{borderColor: getBorderColor('number')}}
           {...register('number', {
             required: "მობილურის ნომერი სავალდებულოა",
@@ -104,6 +129,7 @@ function PersonalInfoForm() {
               message: "უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს"
             }
           })}
+          onChange={handleInputChange}
         />
         <span>უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს</span>
       </NumberDiv>
@@ -112,10 +138,10 @@ function PersonalInfoForm() {
         <Button>შემდეგი</Button>
       </div>
     </Container>
-  )
+  );
 }
 
-export default PersonalInfoForm
+export default PersonalInfoForm;
 
 const Container = styled.form`
   width: 100%;
