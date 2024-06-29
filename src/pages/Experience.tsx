@@ -1,11 +1,17 @@
 import styled from "styled-components";
+import PageNameDiv from "../components/PageNameDiv";
+import BackArrowButton from "../components/BackArrowButton";
 import Header from "../components/exprerienceComp/Header";
-import Input, { Label } from "../components/exprerienceComp/Input";
-import { LightSkyButton } from "../components/EducationForm";
+import Input from "../components/exprerienceComp/Input";
+import { BlueButton, LightSkyButton } from "../pages/Education";
 
 export default function Experience() {
   return (
     <MainDiv>
+      <HeaderDiv>
+        <BackArrowButton />
+        <PageNameDiv pageName={"გამოცდილება"} pageNumber={2} />
+      </HeaderDiv>
       <Header />
       <section style={{ marginTop: "77px", paddingLeft: "102px" }}>
         <div style={{ display: "flex", gap: "31px", flexDirection: "column" }}>
@@ -45,6 +51,10 @@ export default function Experience() {
           </div>
         </div>
       </section>
+      <Footer>
+        <BlueButton>უკან</BlueButton>
+        <BlueButton>შემდეგი</BlueButton>
+      </Footer>
     </MainDiv>
   );
 }
@@ -56,6 +66,15 @@ const MainDiv = styled.div`
   min-height: 100vh;
 `;
 
+const HeaderDiv = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 61px;
+  height: 41px;
+`;
+
+const Label = styled.label``;
+
 const TextArea = styled.textarea`
   height: 123px;
   padding-left: 16px;
@@ -63,4 +82,11 @@ const TextArea = styled.textarea`
   resize: none;
   border: solid 1px #bcbcbc;
   border-radius: 4px;
+`;
+
+const Footer = styled.footer`
+  padding-left: 102px;
+  margin-top: 115px;
+  display: flex;
+  justify-content: space-between;
 `;
