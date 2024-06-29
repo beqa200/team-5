@@ -6,6 +6,7 @@
   margin: 0px;
   padding: 0;
   box-sizing: border-box;
+  font-family: myFont;
 }
 
 html,
@@ -13,3 +14,4 @@ body {
   font-family: myFont;
   min-height: 100vh;
 }
+

@@ -2,15 +2,18 @@ import styled from "styled-components";
 import BackArrowButton from "../components/BackArrowButton";
 import PageNameDiv from "../components/PageNameDiv";
 import PersonalInfoForm from "../components/PersonalInfoForm";
+import { Link } from "react-router-dom";
 
 export default function PersonalInfo() {
   return (
     <div>
       <MainContainer>
       <LeftDiv>
-        <BackArrowButton />
+      <Link to={"/"}>
+          <BackArrowButton />
+        </Link>
         <ContentDiv>
-        <PageNameDiv pageName={"ᲞᲘᲠᲐᲓᲘ ᲘᲜᲤᲝ"} pageNumber={2}/>
+        <PageNameDiv pageName={"ᲞᲘᲠᲐᲓᲘ ᲘᲜᲤᲝ"} pageNumber={1}/>
           <PersonalInfoForm />
         </ContentDiv>
       </LeftDiv>
