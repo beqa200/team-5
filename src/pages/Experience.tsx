@@ -3,8 +3,7 @@ import PageNameDiv from "../components/PageNameDiv";
 import BackArrowButton from "../components/BackArrowButton";
 import Header from "../components/exprerienceComp/Header";
 import Input from "../components/exprerienceComp/Input";
-import { BlueButton, LightSkyButton } from "../components/EducationForm";
-
+import { BlueButton, LightSkyButton } from "../pages/Education";
 
 export default function Experience() {
   return (
@@ -67,7 +66,6 @@ const MainDiv = styled.div`
   min-height: 100vh;
 `;
 
-
 const HeaderDiv = styled.div`
   display: flex;
   align-items: flex-start;
@@ -92,4 +90,3 @@ const Footer = styled.footer`
   display: flex;
   justify-content: space-between;
 `;
-
