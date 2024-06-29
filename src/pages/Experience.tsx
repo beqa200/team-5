@@ -4,7 +4,8 @@ import Input from "../components/exprerienceComp/Input";
 import { BlueButton, LightSkyButton } from "../components/EducationForm";
 import { Link, useNavigate } from "react-router-dom";
 import { FormProvider, useForm, useFieldArray } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { CvContext, CvData } from "../App";
 
 type formTypes = {
   experience: {
@@ -19,7 +20,7 @@ type formTypes = {
 export default function Experience() {
   const [experienceInfo, setExperienceInfo] = useState<formTypes>();
   const navigate = useNavigate();
-
+  const { setExperienceCv, experienceCv } = useContext(CvContext);
   const methods = useForm<formTypes>({
     defaultValues: {
       experience: [
@@ -35,7 +36,6 @@ export default function Experience() {
   });
 
   const submit = (data: formTypes) => {
-    console.log(experienceInfo);
     setExperienceInfo(data);
     navigate("/Education");
   };
@@ -59,12 +59,12 @@ export default function Experience() {
 
     if (hasSubmitted) {
       if (error) {
-        return "#ef5050"; 
+        return "#ef5050";
       } else if (value) {
-        return "#98e37e"; 
+        return "#98e37e";
       }
     }
-    return "#bcbcbc"; 
+    return "#bcbcbc";
   };
 
   useEffect(() => {
@@ -74,117 +74,124 @@ export default function Experience() {
     }
   }, []);
 
-  useEffect(() => {
-    const subscription = methods.watch((value) => {
-      localStorage.setItem("experienceFormData", JSON.stringify(value));
-    });
-    return () => subscription.unsubscribe();
-  }, []);
+useEffect(() => {
+  const subscription = methods.watch((value) => {
+    localStorage.setItem("experienceFormData", JSON.stringify(value));
+    setExperienceCv(value.experience as CvData);
+  });
+
+  return () => {
+    subscription.unsubscribe();
+  };
+}, [methods, setExperienceCv, experienceCv]);
+
 
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(submit)}>
-        <MainDiv>
-          <Header />
-          <section style={{ marginTop: "77px", paddingLeft: "102px" }}>
-            {fields.map((item, index) => (
-              <div
-                key={item.id}
-                style={{
-                  display: "flex",
-                  gap: "31px",
-                  flexDirection: "column",
-                  marginTop: index !== 0 ? "40px" : "0",
-                }}
-              >
-                <Input
-                  type="text"
-                  labelTxt="თანამდებობა"
-                  errorTxt="მინუმუმ 2 სიმბოლო"
-                  name={`experience.[${index}].position`}
-                >
-                  დეველოპერი, დიზაინერი, ა.შ.
-                </Input>
-                <Input
-                  type="text"
-                  labelTxt="დამსაქმებელი"
-                  errorTxt="მინუმუმ 2 სიმბოლო"
-                  name={`experience.[${index}].employer`}
-                >
-                  დამსაქმებელი
-                </Input>
-                <div style={{ display: "flex", gap: "56px" }}>
-                  <div style={{ width: "calc(50% - 23px)" }}>
-                    <Input
-                      type="date"
-                      labelTxt="დაწყების რიცხვი"
-                      name={`experience.[${index}].startingDate`}
-                    ></Input>
-                  </div>
-                  <div style={{ width: "calc(50% - 23px)" }}>
-                    <Input
-                      type="date"
-                      labelTxt="დაწყების რიცხვი"
-                      name={`experience.${index}.finishingDate`}
-                    ></Input>
-                  </div>
-                </div>
-                <TextArea
-                  placeholder="როლი თანამდებობაზე და ზოგადი აღწერა"
-                  {...register(`experience.${index}.description`, {
-                    required: true,
-                  })}
-                  style={{ borderColor: getBorderColor(index) }}
-                ></TextArea>
+    <div>
+      <FormProvider {...methods}>
+        <form onSubmit={handleSubmit(submit)}>
+          <MainDiv>
+            <Header />
+            <section style={{ marginTop: "77px", paddingLeft: "102px" }}>
+              {fields.map((item, index) => (
                 <div
+                  key={item.id}
                   style={{
-                    marginTop: "56px",
-                    height: "1px",
-                    width: "100%",
-                    backgroundColor: "#bcbcbc",
-                  }}
-                ></div>
-                <div
-                  style={{
-                    width: "100%",
                     display: "flex",
-                    justifyContent: "flex-end",
+                    gap: "31px",
+                    flexDirection: "column",
+                    marginTop: index !== 0 ? "40px" : "0",
                   }}
                 >
-                  {index !== 0 && (
-                    <DeleteButton type="button" onClick={() => remove(index)}>
-                      გამოცდილების წაშლა
-                    </DeleteButton>
-                  )}
+                  <Input
+                    type="text"
+                    labelTxt="თანამდებობა"
+                    errorTxt="მინუმუმ 2 სიმბოლო"
+                    name={`experience.[${index}].position`}
+                  >
+                    დეველოპერი, დიზაინერი, ა.შ.
+                  </Input>
+                  <Input
+                    type="text"
+                    labelTxt="დამსაქმებელი"
+                    errorTxt="მინუმუმ 2 სიმბოლო"
+                    name={`experience.[${index}].employer`}
+                  >
+                    დამსაქმებელი
+                  </Input>
+                  <div style={{ display: "flex", gap: "56px" }}>
+                    <div style={{ width: "calc(50% - 23px)" }}>
+                      <Input
+                        type="date"
+                        labelTxt="დაწყების რიცხვი"
+                        name={`experience.[${index}].startingDate`}
+                      ></Input>
+                    </div>
+                    <div style={{ width: "calc(50% - 23px)" }}>
+                      <Input
+                        type="date"
+                        labelTxt="დაწყების რიცხვი"
+                        name={`experience.${index}.finishingDate`}
+                      ></Input>
+                    </div>
+                  </div>
+                  <TextArea
+                    placeholder="როლი თანამდებობაზე და ზოგადი აღწერა"
+                    {...register(`experience.${index}.description`, {
+                      required: true,
+                    })}
+                    style={{ borderColor: getBorderColor(index) }}
+                  ></TextArea>
+                  <div
+                    style={{
+                      marginTop: "56px",
+                      height: "1px",
+                      width: "100%",
+                      backgroundColor: "#bcbcbc",
+                    }}
+                  ></div>
+                  <div
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "flex-end",
+                    }}
+                  >
+                    {index !== 0 && (
+                      <DeleteButton type="button" onClick={() => remove(index)}>
+                        გამოცდილების წაშლა
+                      </DeleteButton>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
 
-            <LightSkyButton
-              style={{ marginTop: fields.length !== 1 ? "-48px" : "0px" }}
-              type="button"
-              onClick={() =>
-                append({
-                  position: "",
-                  employer: "",
-                  startingDate: "mm/dd/yyyy",
-                  finishingDate: "mm/dd/yyyy",
-                  description: "",
-                })
-              }
-            >
-              მეტი გამოცდილების დამატება
-            </LightSkyButton>
-          </section>
-          <Footer>
-            <Link to={"/PersonalInfo"}>
-              <BlueButton type="button">უკან</BlueButton>
-            </Link>
-            <BlueButton>შემდეგი</BlueButton>
-          </Footer>
-        </MainDiv>
-      </form>
-    </FormProvider>
+              <LightSkyButton
+                style={{ marginTop: fields.length !== 1 ? "-48px" : "0px" }}
+                type="button"
+                onClick={() =>
+                  append({
+                    position: "",
+                    employer: "",
+                    startingDate: "mm/dd/yyyy",
+                    finishingDate: "mm/dd/yyyy",
+                    description: "",
+                  })
+                }
+              >
+                მეტი გამოცდილების დამატება
+              </LightSkyButton>
+            </section>
+            <Footer>
+              <Link to={"/PersonalInfo"}>
+                <BlueButton type="button">უკან</BlueButton>
+              </Link>
+              <BlueButton>შემდეგი</BlueButton>
+            </Footer>
+          </MainDiv>
+        </form>
+      </FormProvider>
+    </div>
   );
 }
 

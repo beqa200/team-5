@@ -102,7 +102,6 @@ const Input: React.FC<InputProps> = ({
     }
   };
 
-  console.log(value);
 
   return (
     <div style={{ position: "relative" }}>
