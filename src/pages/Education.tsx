@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import BackArrowButton from "../components/BackArrowButton";
@@ -12,11 +12,28 @@ const EducationPage: React.FC = () => {
     register,
     handleSubmit,
     clearErrors,
+    setValue,
+    getValues,
     formState: { errors },
   } = useForm<FormData>();
 
+  useEffect(() => {
+    const storedData = localStorage.getItem("educationFormData");
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+      Object.keys(parsedData).forEach((key) => {
+        setValue(key as any, parsedData[key]);
+      });
+      setFormCount(parsedData.formCount || 1);
+    }
+  }, [setValue]);
+
   const onSubmit: SubmitHandler<FormData> = (data) => {
     console.log(data);
+    localStorage.setItem(
+      "educationFormData",
+      JSON.stringify({ ...data, formCount })
+    );
   };
 
   const addForm = () => {
@@ -31,39 +48,56 @@ const EducationPage: React.FC = () => {
   const FormComponent: React.FC<{ formIndex: number }> = ({ formIndex }) => {
     return (
       <>
-        <Label>სასწავლებელი</Label>
-        <Controller
-          name={`schoolName_${formIndex}`}
-          control={control}
-          defaultValue=""
-          rules={{ minLength: 2 }}
-          render={({ field }) => (
-            <Input
-              {...field}
-              type="text"
-              {...register(`schoolName_${formIndex}`, {
-                required: "schoolname is required",
-                minLength: {
-                  value: 2,
-                  message: "სასწავლებელი უნდა შეიცავდეს მინიმუმ 2 ასოს",
-                },
-              })}
-              placeholder="სასწავლებელი"
-              style={{
-                borderColor: errors[`schoolName_${formIndex}`]
-                  ? "red"
-                  : field.value?.length >= 2
-                  ? "green"
-                  : "#bcbcbc",
-              }}
-            />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            width: "100%",
+          }}
+        >
+          <Label>სასწავლებელი</Label>
+          <Controller
+            name={`schoolName_${formIndex}`}
+            control={control}
+            defaultValue=""
+            rules={{ minLength: 2 }}
+            render={({ field }) => (
+              <Input
+                {...field}
+                type="text"
+                {...register(`schoolName_${formIndex}`, {
+                  required: "schoolname is required",
+                  minLength: {
+                    value: 2,
+                    message: "სასწავლებელი უნდა შეიცავდეს მინიმუმ 2 ასოს",
+                  },
+                })}
+                placeholder="სასწავლებელი"
+                style={{
+                  borderColor: errors[`schoolName_${formIndex}`]
+                    ? "red"
+                    : field.value?.length >= 2
+                    ? "green"
+                    : "#bcbcbc",
+                }}
+                onChange={(e) => {
+                  field.onChange(e);
+                  const values = getValues();
+                  localStorage.setItem(
+                    "educationFormData",
+                    JSON.stringify({ ...values, formCount })
+                  );
+                }}
+              />
+            )}
+          />
+          {errors[`schoolName_${formIndex}`] && (
+            <InputError>
+              სასწავლებელი უნდა შეიცავდეს მინიმუმ 2 სიმბოლოს
+            </InputError>
           )}
-        />
-        {errors[`schoolName_${formIndex}`] && (
-          <InputError>
-            სასწავლებელი უნდა შეიცავდეს მინიმუმ 2 სიმბოლოს
-          </InputError>
-        )}
+        </div>
         <SelAndCalDiv>
           <LabelField>
             <Label>ხარისხი</Label>
@@ -83,6 +117,14 @@ const EducationPage: React.FC = () => {
                       : field.value !== ""
                       ? "green"
                       : "#bcbcbc",
+                  }}
+                  onChange={(e) => {
+                    field.onChange(e);
+                    const values = getValues();
+                    localStorage.setItem(
+                      "educationFormData",
+                      JSON.stringify({ ...values, formCount })
+                    );
                   }}
                 >
                   <option value="" disabled>
@@ -129,41 +171,66 @@ const EducationPage: React.FC = () => {
                       ? "green"
                       : "#bcbcbc",
                   }}
+                  onChange={(e) => {
+                    field.onChange(e);
+                    const values = getValues();
+                    localStorage.setItem(
+                      "educationFormData",
+                      JSON.stringify({ ...values, formCount })
+                    );
+                  }}
                 />
               )}
             />
           </LabelField>
         </SelAndCalDiv>
-        <Label style={{ marginTop: "30px" }}>აღწერა</Label>
-        <Controller
-          name={`description_${formIndex}`}
-          control={control}
-          defaultValue=""
-          render={({ field }) => (
-            <Textarea
-              rows={4}
-              placeholder="განათლების აღწერა"
-              {...field}
-              {...register(`description_${formIndex}`, {
-                required: "description is required",
-                minLength: {
-                  value: 4,
-                  message: "აღწერა უნდა შეიცავდეს მინიმუმ 4 სიმბოლოს",
-                },
-              })}
-              style={{
-                borderColor: errors[`description_${formIndex}`]
-                  ? "red"
-                  : field.value !== ""
-                  ? "green"
-                  : "#bcbcbc",
-              }}
-            />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            width: "100%",
+          }}
+        >
+          <Label style={{ marginTop: "30px" }}>აღწერა</Label>
+          <Controller
+            name={`description_${formIndex}`}
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <Textarea
+                rows={4}
+                placeholder="განათლების აღწერა"
+                {...field}
+                {...register(`description_${formIndex}`, {
+                  required: "description is required",
+                  minLength: {
+                    value: 4,
+                    message: "აღწერა უნდა შეიცავდეს მინიმუმ 4 სიმბოლოს",
+                  },
+                })}
+                style={{
+                  borderColor: errors[`description_${formIndex}`]
+                    ? "red"
+                    : field.value !== ""
+                    ? "green"
+                    : "#bcbcbc",
+                }}
+                onChange={(e) => {
+                  field.onChange(e);
+                  const values = getValues();
+                  localStorage.setItem(
+                    "educationFormData",
+                    JSON.stringify({ ...values, formCount })
+                  );
+                }}
+              />
+            )}
+          />
+          {errors[`description_${formIndex}`] && (
+            <InputError>აღწერა უნდა შეიცავდეს მინიმუმ 4 სიმბოლოს</InputError>
           )}
-        />
-        {errors[`description_${formIndex}`] && (
-          <InputError>აღწერა უნდა შეიცავდეს მინიმუმ 4 სიმბოლოს</InputError>
-        )}
+        </div>
         <Line></Line>
       </>
     );
