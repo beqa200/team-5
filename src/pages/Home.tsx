@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Redberry from "../../public/images/LOGO-02 3.png";
 import BackgroundImage from "../../public/images/shutterstock_2189773743 1.png";
 import Agency from "../../public/images/LOGO-40 1.png"
+import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
@@ -10,7 +11,7 @@ export default function Home() {
         <img src={Redberry} alt="Redberry Logo" />
       </div>
       <div className="center-div">
-        <button>ᲠᲔᲖᲘᲣᲛᲔᲡ ᲓᲐᲛᲐᲢᲔᲑᲐ</button>
+        <Link to={"/PersonalInfo"}><button>ᲠᲔᲖᲘᲣᲛᲔᲡ ᲓᲐᲛᲐᲢᲔᲑᲐ</button></Link>
         <img src={Agency} alt="Agency Logo" />
       </div>
     </Background>
