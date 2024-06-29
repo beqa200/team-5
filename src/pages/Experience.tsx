@@ -73,8 +73,6 @@ const HeaderDiv = styled.div`
   height: 41px;
 `;
 
-const Label = styled.label``;
-
 const TextArea = styled.textarea`
   height: 123px;
   padding-left: 16px;

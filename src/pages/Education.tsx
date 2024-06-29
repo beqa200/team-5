@@ -255,16 +255,19 @@ const EducationPage: React.FC = () => {
                 )}
               </FormAndButton>
             ))}
-            <LightSkyButton onClick={addForm} formCount={formCount}>
+            <LightSkyButton
+              onClick={addForm}
+              style={
+                formCount > 1 ? { marginTop: "-45px" } : { marginTop: "0" }
+              }
+            >
               სხვა სასწავლებლის დამატება
             </LightSkyButton>
             <ButtonDivs>
               <Link to={"/experience"}>
-                <BlueButton formCount={formCount}>უკან</BlueButton>
+                <BlueButton>უკან</BlueButton>
               </Link>
-              <BlueButton formCount={formCount} type="submit">
-                დასრულება
-              </BlueButton>
+              <BlueButton type="submit">დასრულება</BlueButton>
             </ButtonDivs>
           </Form>
         </ContentDiv>
@@ -404,7 +407,7 @@ const Line = styled.div`
   border-top: 1px solid #bcbcbc;
 `;
 
-export const LightSkyButton = styled.button<{ formCount: number }>`
+export const LightSkyButton = styled.button`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -422,7 +425,6 @@ export const LightSkyButton = styled.button<{ formCount: number }>`
   color: #fff;
   padding: 14px 22px;
   cursor: pointer;
-  margin-top: ${({ formCount }) => (formCount > 1 ? "-45px" : "0")};
 `;
 
 export const BlueButton = styled(LightSkyButton)`
