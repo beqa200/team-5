@@ -1,9 +1,11 @@
 import styled from 'styled-components';
-import { useForm } from 'react-hook-form';
-import { useEffect } from 'react';
+import { useForm, useWatch } from 'react-hook-form';
+import { useContext, useEffect } from 'react';
+import CVcomponent from './CVcomponent';
+import { CvContext, personalCvData } from '../App';
 
 function PersonalInfoForm() {
-  const { register, handleSubmit, formState: { errors, submitCount }, setValue } = useForm();
+  const { register, handleSubmit, control, formState: { errors, submitCount }, setValue } = useForm();
 
   useEffect(() => {
     const fields = ['name', 'surname', 'email', 'number'];
@@ -30,10 +32,14 @@ function PersonalInfoForm() {
     return "#BCBCBC";
   };
 
-  const handleInputChange = (event: { target: { name: string; value: string; }; }) => {
-    localStorage.setItem(event.target.name, event.target.value);
-  };
+  const {setPersonalInfoCv} = useContext(CvContext)
+  const values = useWatch({ control });
+  console.log(values);
 
+  useEffect(() => {
+    setPersonalInfoCv(values as personalCvData);
+  },[setPersonalInfoCv, values]);
+  
   return (
     <Container onSubmit={handleSubmit(onSubmit)}>
       <NamesDiv>
@@ -52,7 +58,7 @@ function PersonalInfoForm() {
                 message: 'მინიმუმ 2 ასო, ქართული ასოები'
               }
             })} 
-            onChange={handleInputChange}
+
           />
           <span>მინიმუმ 2 ასო, ქართული ასოები</span>
         </NameLeft>
@@ -71,7 +77,6 @@ function PersonalInfoForm() {
                 message: 'მინიმუმ 2 ასო, ქართული ასოები'
               }
             })} 
-            onChange={handleInputChange}
           />
           <span>მინიმუმ 2 ასო, ქართული ასოები</span>
         </SurnameRight>
@@ -89,7 +94,6 @@ function PersonalInfoForm() {
           <textarea 
             name="about" 
             placeholder='ზოგადი ინფო შენ შესახებ'
-            onChange={handleInputChange}
           ></textarea>
         </TextareaDiv>
       </div>
@@ -109,7 +113,6 @@ function PersonalInfoForm() {
               message: "უნდა მთავრდებოდეს @redberry.ge-ით"
             }
           })}
-          onChange={handleInputChange}
         />
         <span>უნდა მთავრდებოდეს @redberry.ge-ით</span>
       </EmailDiv>
@@ -129,7 +132,6 @@ function PersonalInfoForm() {
               message: "უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს"
             }
           })}
-          onChange={handleInputChange}
         />
         <span>უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს</span>
       </NumberDiv>
@@ -298,3 +300,7 @@ const Button = styled.button`
     transform: scale(1.1);
   }
 `
+function watch(): any {
+  throw new Error('Function not implemented.');
+}
+

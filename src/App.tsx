@@ -14,14 +14,25 @@ export type CvData = {
   description?: string;
 }[];
 
+export type personalCvData = {
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  email: string;
+}[];
+
 interface CvContextType {
   experienceCv: CvData;
   setExperienceCv: Dispatch<SetStateAction<CvData>>;
+  personalInfoCv: personalCvData;
+  setPersonalInfoCv: Dispatch<SetStateAction<personalCvData>>;
 }
 
 export const CvContext = createContext<CvContextType>({
   experienceCv: [],
   setExperienceCv: () => {},
+  personalInfoCv: [],
+  setPersonalInfoCv: () => {},
 });
 
 function App() {
@@ -35,9 +46,17 @@ function App() {
       description: "",
     },
   ]);
+  const [personalInfoCv, setPersonalInfoCv] = useState<personalCvData>([
+    {
+      firstName: "",
+      lastName: "",
+      phoneNumber: "",
+      email: "",
+    },
+  ]);
 
   return (
-    <CvContext.Provider value={{ experienceCv, setExperienceCv }}>
+    <CvContext.Provider value={{ experienceCv, setExperienceCv, personalInfoCv, setPersonalInfoCv }}>
       <div
         style={{
           display: location.pathname == "/" ? "block" : "flex",

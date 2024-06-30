@@ -80,7 +80,7 @@ export default function Experience() {
     if (savedData) {
       methods.reset(JSON.parse(savedData));
     }
-  }, []);
+  }, [methods]);
 
   useEffect(() => {
     const subscription = methods.watch((value) => {
