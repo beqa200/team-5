@@ -3,7 +3,12 @@ import Header from "../components/exprerienceComp/Header";
 import Input from "../components/exprerienceComp/Input";
 import { BlueButton, LightSkyButton } from "../components/EducationForm";
 import { Link, useNavigate } from "react-router-dom";
-import { FormProvider, useForm, useFieldArray } from "react-hook-form";
+import {
+  FormProvider,
+  useForm,
+  useFieldArray,
+  useWatch,
+} from "react-hook-form";
 import { useContext, useEffect, useState } from "react";
 import { CvContext, CvData } from "../App";
 
@@ -67,6 +72,9 @@ export default function Experience() {
     return "#bcbcbc";
   };
 
+  const values = useWatch({ control, name: `experience` });
+  setExperienceCv(values as CvData);
+  console.log(experienceInfo);
   useEffect(() => {
     const savedData = localStorage.getItem("experienceFormData");
     if (savedData) {
@@ -74,17 +82,15 @@ export default function Experience() {
     }
   }, []);
 
-useEffect(() => {
-  const subscription = methods.watch((value) => {
-    localStorage.setItem("experienceFormData", JSON.stringify(value));
-    setExperienceCv(value.experience as CvData);
-  });
+  useEffect(() => {
+    const subscription = methods.watch((value) => {
+      localStorage.setItem("experienceFormData", JSON.stringify(value));
+    });
 
-  return () => {
-    subscription.unsubscribe();
-  };
-}, [methods, setExperienceCv, experienceCv]);
-
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [methods, setExperienceCv, experienceCv]);
 
   return (
     <div>
