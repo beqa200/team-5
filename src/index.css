@@ -10,8 +10,8 @@
 }
 
 html,
-body {
+body,
+#root {
   font-family: myFont;
   min-height: 100vh;
 }
-
