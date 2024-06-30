@@ -22,24 +22,28 @@ const Input: React.FC<InputProps> = ({
     formState: { errors, submitCount },
   } = useFormContext();
 
-  const georgianRegex = /^[ა-ჰ]+$/;
+  // const georgianRegex = /^[ა-ჰ]+$/;
 
-  const validateGeorgian = (value: string) =>
-    georgianRegex.test(value) || "Must contain only Georgian characters";
+  // const validateGeorgian = (value: string) =>
+  //   georgianRegex.test(value) || "Must contain only Georgian characters";
 
-  const validateMinLength = (value: string) =>
-    value.length >= 2 || "Must be at least 2 characters";
+  // const validateMinLength = (value: string) =>
+  //   value.length >= 2 || "Must be at least 2 characters";
 
   const validationRules: any = {
     required: "This field is required",
+    minLength: {
+      value: 2,
+      message: "Must be at least 2 characters",
+    },
   };
 
-  if (name.includes("position") || name.includes("employer")) {
-    validationRules.validate = {
-      minLength: validateMinLength,
-      georgian: validateGeorgian,
-    };
-  }
+  // if (name.includes("position") || name.includes("employer")) {
+  //   validationRules.validate = {
+  //     minLength: validateMinLength,
+  //     georgian: validateGeorgian,
+  //   };
+  // }
 
   const getNestedValue = (obj: any, path: string) => {
     return path
@@ -101,7 +105,6 @@ const Input: React.FC<InputProps> = ({
       }
     }
   };
-
 
   return (
     <div style={{ position: "relative" }}>
