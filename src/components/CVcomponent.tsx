@@ -13,6 +13,14 @@ function CVcomponent() {
       {location.pathname === "/" ||
         (location.pathname === "/PersonalInfo" ? null : (
           <>
+            <div
+              style={{
+                width: "100%",
+                height: "1px",
+                backgroundColor: "#c8c8c8",
+                marginTop: "18px",
+              }}
+            ></div>
             <Experience>ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ</Experience>
             {experienceCv.map((item, index) => (
               <div key={index} style={{ marginTop: "15px" }}>
