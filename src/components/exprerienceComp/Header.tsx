@@ -1,11 +1,14 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
     <HeaderDiv>
-      <ArrowDiv>
-        <img src="/Vector.jpg" />
-      </ArrowDiv>
+      <Link to={"/PersonalInfo"}>
+        <ArrowDiv>
+          <img src="/Vector.jpg" />
+        </ArrowDiv>
+      </Link>
       <SecondDiv>
         <HeaderTxt>გამოცდილება</HeaderTxt>
         <HeaderTxt>2/3</HeaderTxt>
