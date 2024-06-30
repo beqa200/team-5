@@ -9,9 +9,9 @@ function CVcomponent() {
     <div style={{ padding: "48px 75px" }}>
       <Experience>ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ</Experience>
       {experienceCv.map((item, index) => (
-        <div key={index}>
+        <div key={index} style={{ marginTop: "15px" }}>
           <div style={{ display: "flex" }}>
-            <p>{item.position}</p>
+            <Position>{item.position}</Position>
             <p>{item.employer}</p>
           </div>
           <div style={{ display: "flex" }}>
@@ -32,4 +32,8 @@ const Experience = styled.h1`
   letter-spacing: normal;
   color: #f93b1d;
   margin-top: 24px;
+`;
+
+const Position = styled.p`
+
 `;

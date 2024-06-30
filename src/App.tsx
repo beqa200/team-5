@@ -38,22 +38,12 @@ function App() {
 
   return (
     <CvContext.Provider value={{ experienceCv, setExperienceCv }}>
-      <div
-        style={{
-          display: location.pathname == "/" ? "block" : "flex",
-          minHeight: "100vh",
-        }}
-      >
-        <div style={{ minHeight: "100vh" }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/PersonalInfo" element={<PersonalInfo />} />
             <Route path="/Experience" element={<Experience />} />
             <Route path="/Education" element={<Education />} />
           </Routes>
-        </div>
-        <div> {location.pathname == "/" ? null : <CVcomponent />}</div>
-      </div>
     </CvContext.Provider>
   );
 }

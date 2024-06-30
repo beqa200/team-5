@@ -11,6 +11,7 @@ import {
 } from "react-hook-form";
 import { useContext, useEffect, useState } from "react";
 import { CvContext, CvData } from "../App";
+import CVcomponent from "../components/CVcomponent";
 
 type formTypes = {
   experience: {
@@ -73,7 +74,9 @@ export default function Experience() {
   };
 
   const values = useWatch({ control, name: `experience` });
-  setExperienceCv(values as CvData);
+  useEffect(() => {
+    setExperienceCv(values as CvData);
+  }, [values, setExperienceCv]);
   console.log(experienceInfo);
   useEffect(() => {
     const savedData = localStorage.getItem("experienceFormData");
@@ -93,7 +96,7 @@ export default function Experience() {
   }, [methods, setExperienceCv, experienceCv]);
 
   return (
-    <div>
+    <div style={{ display: "flex" }}>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(submit)}>
           <MainDiv>
@@ -197,6 +200,7 @@ export default function Experience() {
           </MainDiv>
         </form>
       </FormProvider>
+      <CVcomponent />
     </div>
   );
 }
