@@ -4,7 +4,6 @@ import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import BackArrowButton from "../components/BackArrowButton";
 import PageNameDiv from "../components/PageNameDiv";
 import { Link } from "react-router-dom";
-import CVcomponent from "../components/CVcomponent";
 
 const EducationPage: React.FC = () => {
   const [formCount, setFormCount] = useState(1);

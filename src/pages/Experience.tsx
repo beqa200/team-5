@@ -213,14 +213,6 @@ const MainDiv = styled.div`
 `;
 
 
-const HeaderDiv = styled.div`
-  display: flex;
-  align-items: flex-start;
-  gap: 61px;
-  height: 41px;
-`;
-
-
 const TextArea = styled.textarea`
   height: 123px;
   padding-left: 16px;
