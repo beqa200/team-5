@@ -1,10 +1,9 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import PersonalInfo from "./pages/PersonalInfo";
 import Experience from "./pages/Experience";
 import Education from "./pages/Education";
 import Home from "./pages/Home";
 import { createContext, useState, Dispatch, SetStateAction } from "react";
-import CVcomponent from "./components/CVcomponent";
 
 export type CvData = {
   position?: string;
@@ -25,7 +24,6 @@ export const CvContext = createContext<CvContextType>({
 });
 
 function App() {
-  const location = useLocation();
   const [experienceCv, setExperienceCv] = useState<CvData>([
     {
       position: "",
