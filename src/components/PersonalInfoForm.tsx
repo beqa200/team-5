@@ -1,21 +1,10 @@
 import styled from 'styled-components';
 import { useForm, useWatch } from 'react-hook-form';
 import { useContext, useEffect } from 'react';
-import CVcomponent from './CVcomponent';
-import { CvContext, personalCvData } from '../App';
+import { CvContext } from '../App';
 
 function PersonalInfoForm() {
-  const { register, handleSubmit, control, formState: { errors, submitCount }, setValue } = useForm();
-
-  useEffect(() => {
-    const fields = ['name', 'surname', 'email', 'number'];
-    fields.forEach(field => {
-      const storedValue = localStorage.getItem(field);
-      if (storedValue) {
-        setValue(field, storedValue);
-      }
-    });
-  }, [setValue]);
+  const { register, handleSubmit, control, watch, reset, formState: { errors, submitCount } } = useForm();
 
   const onSubmit = (data: unknown) => {
     console.log(data);
@@ -32,14 +21,26 @@ function PersonalInfoForm() {
     return "#BCBCBC";
   };
 
-  const {setPersonalInfoCv} = useContext(CvContext)
+  const {setPersonalInfoCv, personalInfoCv} = useContext(CvContext)
   const values = useWatch({ control });
   console.log(values);
 
   useEffect(() => {
-    setPersonalInfoCv(values as personalCvData);
-  },[setPersonalInfoCv, values]);
-  
+    const subscription = watch((value) => {
+      localStorage.setItem("experienceFormData", JSON.stringify(value));
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [setPersonalInfoCv, personalInfoCv, watch]);
+
+  useEffect(() => {
+    const savedData = localStorage.getItem("experienceFormData");
+    if (savedData) {
+      reset(JSON.parse(savedData));
+    }
+  }, [reset]);
   return (
     <Container onSubmit={handleSubmit(onSubmit)}>
       <NamesDiv>
@@ -300,7 +301,4 @@ const Button = styled.button`
     transform: scale(1.1);
   }
 `
-function watch(): any {
-  throw new Error('Function not implemented.');
-}
 

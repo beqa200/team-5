@@ -3,6 +3,7 @@ import BackArrowButton from "../components/BackArrowButton";
 import PageNameDiv from "../components/PageNameDiv";
 import PersonalInfoForm from "../components/PersonalInfoForm";
 import { Link } from "react-router-dom";
+import CVcomponent from '../components/CVcomponent';
 
 export default function PersonalInfo() {
   return (
@@ -17,7 +18,9 @@ export default function PersonalInfo() {
           <PersonalInfoForm />
         </ContentDiv>
       </LeftDiv>
-      <RightComponent>CV</RightComponent>
+      <RightComponent>
+        <CVcomponent />
+      </RightComponent>
     </MainContainer>
     </div>
   )

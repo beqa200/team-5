@@ -3,10 +3,23 @@ import styled from "styled-components";
 import { CvContext } from "../App";
 
 function CVcomponent() {
-  const { experienceCv } = useContext(CvContext);
+  const { experienceCv, personalInfoCv } = useContext(CvContext);
   console.log(experienceCv);
   return (
     <div style={{ padding: "48px 75px" }}>
+      {personalInfoCv.map((item, index) => (
+        <div key={index}>
+          <div style={{ display: "flex" }}>
+            <p>{item.firstName}</p>
+            <p>{item.lastName}</p>
+          </div>
+          <div style={{ display: "flex" }}>
+            <p>{item.phoneNumber}</p>
+            <p>{item.email}</p>
+          </div>
+        </div>
+      ))}
+      
       <Experience>ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ</Experience>
       {experienceCv.map((item, index) => (
         <div key={index}>
